@@ -1,3 +1,245 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:97a5229bf957db88b00df7760cef9cde010d2c687bfe94a4c08d41a065f82626
-size 5298
+*{
+    font-family: "Segoe UI", Cantarell, Ubuntu, Tahoma, -apple-system, BlinkMacSystemFont, sans-serif;
+    text-shadow: 0px 0px 1px #ACACAC;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-shadow: rgba(0,0,0,.01) 0 0 1px;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-transition: .25s ease-in-out !important;
+    transition: .25s ease-in-out !important;
+}
+html,body {
+    border:0;
+    margin:0;
+    padding:0;
+    outline:0;
+}
+.material-symbols-outlined {
+    font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 48
+  }
+::-webkit-scrollbar {
+    display: none;
+}
+::-webkit-input-placeholder {
+    color: white;
+    font-weight: 400 !important;
+    text-shadow: 0px 0px 1px #ACACAC !important;
+    -webkit-font-smoothing: antialiased !important;
+    -webkit-text-shadow: rgba(0,0,0,.1) 0 0 1px !important;
+    -moz-osx-font-smoothing: grayscale !important;
+}
+:-moz-placeholder {
+    color: white;
+    opacity:  1;
+    font-weight: 400 !important;
+    text-shadow: 0px 0px 1px #ACACAC !important;
+    -webkit-font-smoothing: antialiased !important;
+    -webkit-text-shadow: rgba(0,0,0,.1) 0 0 1px !important;
+    -moz-osx-font-smoothing: grayscale !important;
+}
+::-moz-placeholder {
+    color: white;
+    opacity:  1;
+    font-weight: 400 !important;
+    text-shadow: 0px 0px 1px #ACACAC !important;
+    -webkit-font-smoothing: antialiased !important;
+    -webkit-text-shadow: rgba(0,0,0,.1) 0 0 1px !important;
+    -moz-osx-font-smoothing: grayscale !important;
+}
+:-ms-input-placeholder {
+    color: white;
+    font-weight: 400 !important;
+    text-shadow: 0px 0px 1px #ACACAC !important;
+    -webkit-font-smoothing: antialiased !important;
+    -webkit-text-shadow: rgba(0,0,0,.1) 0 0 1px !important;
+    -moz-osx-font-smoothing: grayscale !important;
+}
+::-ms-input-placeholder {
+    color: white;
+    font-weight: 400 !important;
+    text-shadow: 0px 0px 1px #ACACAC !important;
+    -webkit-font-smoothing: antialiased !important;
+    -webkit-text-shadow: rgba(0,0,0,.1) 0 0 1px !important;
+    -moz-osx-font-smoothing: grayscale !important;
+}
+@keyframes fadeIn {
+    to {
+    opacity: 1;
+    }
+}
+.fade-in {
+    opacity: 0;
+    animation: fadeIn .5s ease-in 1 forwards;
+}
+html {
+    margin: 0px;
+    padding: 0px;
+}
+.bold {
+    font-weight: 600;
+}
+.mdl-grid.center-items {
+    justify-content: center;
+    text-align: center;
+}
+#header-bar {
+    -webkit-app-region: drag;
+    height: 40px; 
+    padding: 0px;
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    width: 100%;
+    margin-bottom: 40px;
+    font-family: Roboto, "Segoe UI",sans-serif;
+}
+main {
+    margin-top: 40px;
+        z-index: 1;
+}
+
+.mdl-layout__header-row, .mdl-layout__drawer-button {
+    padding-top: 40px;
+    color: white;
+}
+.transparent {
+    background: #212121;
+    background: rgba(0,0,0,0) !important;
+}
+.neon {
+    background: #010101;
+    background: rgba(0,0,0,0.4);
+}
+#bg{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -20;            
+    background: rgba(0,0,0,0);
+    filter: blur(10px);     
+    -webkit-filter: blur(10px);
+}
+#bgblur {
+    z-index: -19;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;   
+    filter: blur(10px);     
+    -webkit-filter: blur(10px);
+}
+.w3-pink {
+    background: rgba(233,30,99,0.2) !important;
+}
+.w3-green {
+    background: rgba(76,175,80,0.2) !important;
+}
+.w3-blue {
+    background: rgba(33,150,243,0.2) !important;
+}
+.w3-brown {
+    background: rgba(121,85,72,0.2) !important;
+}
+.transparent {
+    background: rgba(0,0,0,0) !important;
+}
+.translucent {
+    background: rgba(0,0,0,0.5) !important;
+    color: #fff;
+}
+body {
+    z-index: 1;
+    color: white;
+}
+#title {
+    position: fixed;
+    top: 0px;
+    left: 12px; 
+    line-height: 40px;
+    font-size: 14px;
+    font-family: Cantarell;
+}
+.round {
+    border-radius: 5px;
+}
+.mdl-card-info {
+    height: 110px;
+    width: 300px;
+    background-color: white;
+}
+.mdl-card__title {
+    margin-left: 15px;
+}
+#title-bar-btns {
+    -webkit-app-region: no-drag;
+    position: fixed;
+    top: 1px;
+    right: 0px; 
+    width:114px;
+    display:flex;
+    flex-flow:row wrap;
+    align-items: center;
+    justify-content: flex-end;
+}
+.mdl-grid {
+    margin-top: 2%;
+}
+#title-bar-btns button {
+    height: 38px;
+    flex-basis: 38px;
+    width: 38px;
+    display:flex;
+    flex-flow:row wrap;
+    justify-content: center;
+    align-items: center;
+    place-items: center;
+    background-color: transparent;
+    border: none;
+    color: #F1F1F1;
+    font-size: 16px;
+}
+#title-bar-btns button:focus-visible {
+    outline:none;
+}
+h1, h2, h3, h4, h5, p, div, .mdl-button {
+    font-family: Roboto, Cantarell, Ubuntu, Tahoma, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+#title-bar-btns button:hover {
+    background-color: #3F3F41;
+}
+#content {
+    padding: 12px; 
+    color: #CCCCCC;
+}
+a {
+    color: #68217A;
+}
+.mdl-layout__drawer-button {
+    position: absolute;
+    top: -5px;
+    z-index: 9999;
+    color: white;
+}
+.material-dark-theme {
+    background-color: #212121;
+    background-color: rgba(0,0,0,0.2);
+    color: white !important;
+}
+.TopPad {
+    margin-top: 25px;
+}
+.TopPadHeavy {
+    margin-top: 65px;
+}
+.BottomPad {
+    margin-bottom: 25px;
+}
+.BottomPadHeavy {
+    margin-bottom: 65px;
+}

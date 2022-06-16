@@ -1,3 +1,20 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:b7f5d855983b22068aecc43c808540baa4313fcdda3d6ece28d9272be3546ac3
-size 786
+const { BrowserWindow } = require('@electron/remote')
+const $ = require('jquery')
+const electron = require("electron")
+const ipc = electron.ipcRenderer;
+
+$(()=>{
+    $('#discordframe').css({width:$(window).outerWidth()+'px',height:($(window).outerHeight()-40)+'px'})
+    $(window).on('resize',()=>{
+        $('#discordframe').css({width:$(window).outerWidth()+'px',height:($(window).outerHeight()-40)+'px'})
+    })
+    document.getElementById("min-btn").addEventListener("click", function (e) {
+        ipc.send("minimize-window")
+    })
+    document.getElementById("max-btn").addEventListener("click", function (e) {
+        ipc.send("maximize-window") 
+    })
+    document.getElementById("close-btn").addEventListener("click", function (e) {
+        ipc.send("close-window")
+    })
+})

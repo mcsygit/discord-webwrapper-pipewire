@@ -1,3 +1,47 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:485e9e3980a74cf119454dbd972274a5c056ca68f479fc85cb065b8103a91074
-size 1435
+{
+  "name": "discord-webwrapper-pipewire",
+  "version": "1.0.0",
+  "description": "Webpage wrapper for discord that does required lifting for screen sharing on linux to work with audio",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "electron .",
+    "package": "electron-forge package",
+    "make": "electron-forge make",
+    "publish": "electron-forge publish"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mcsygit/discord-webwrapper-pipewire.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mcsygit/discord-webwrapper-pipewire/issues"
+  },
+  "keywords": [
+    "Electron",
+    "discord",
+    "typescript"
+  ],
+  "homepage": "https://github.com/mcsygit/discord-webwrapper-pipewire#readme",
+  "config": {},
+  "dependencies": {
+    "@electron/remote": "^2.0.8",
+    "@types/jquery": "^3.5.14",
+    "@types/json-schema": "^7.0.11",
+    "electron-squirrel-startup": "^1.0.0",
+    "jquery": "^3.6.0"
+  },
+  "devDependencies": {
+    "@electron-forge/cli": "^6.0.0-beta.63",
+    "@electron-forge/maker-deb": "^6.0.0-beta.63",
+    "@electron-forge/maker-rpm": "^6.0.0-beta.63",
+    "@electron-forge/maker-squirrel": "^6.0.0-beta.63",
+    "@electron-forge/maker-zip": "^6.0.0-beta.63",
+    "@typescript-eslint/eslint-plugin": "^4.33.0",
+    "@typescript-eslint/parser": "^4.33.0",
+    "electron": "19.0.4",
+    "eslint": "^7.32.0",
+    "typescript": "^4.7.2"
+  }
+}
