@@ -16,7 +16,7 @@ const trayIcon = Buffer.from(`
 
 let tray = null
 const createWindow = async () => {
-    const icon = await sharp(trayIcon).png().resize(128, 128).toBuffer();
+    const icon = await sharp(trayIcon).png().resize(1024, 1024).toBuffer();
     const win = new BrowserWindow({
       width: 1200,
       height: 800,
@@ -28,7 +28,7 @@ const createWindow = async () => {
       webPreferences: {
         experimentalFeatures: true,
         nodeIntegration: true,
-        nodeIntegrationInSubFrames:true,
+        nodeIntegrationInSubFrames:false,
         contextIsolation:false,
         enableRemoteModule: true,
         webviewTag: true,
@@ -43,14 +43,15 @@ const createWindow = async () => {
         details.requestHeaders['User-Agent'] = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36';
         callback({ cancel: false, requestHeaders: details.requestHeaders });
     })
-    win.webContents.session.setPermissionRequestHandler((webContents, permission, callback) => {
-        callback(true);
+    win.webContents.session.setPermissionCheckHandler(async (webContents, permission, details) => {
+        return true
+    })
+    win.webContents.session.setPermissionRequestHandler(async (webContents, permission, callback, details) => {
+        callback(true)
     })
     win.loadFile('src/index.html')
-
-    systemPreferences.askForMediaAccess('camera')
-    systemPreferences.askForMediaAccess('microphone')
-
+    //win.loadURL('https://discord.com/app')
+    
     ipc.on("maximize-window", function(event) {
         if(win.isMaximized()) {
             win.unmaximize();
