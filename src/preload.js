@@ -1,4 +1,12 @@
+const { desktopCapturer, contextBridge } = require("electron");
+const { readFileSync } = require("fs")
+const { join } = require("path")
+
 window.addEventListener('DOMContentLoaded', () => {
+
+    const rendererScript = document.createElement("script");
+    rendererScript.text = readFileSync(join(__dirname, "renderer.js"), "utf8");
+    document.body.appendChild(rendererScript);
 
     var css = ``
     var head = document.head || document.getElementsByTagName('head')[0]
@@ -7,30 +15,51 @@ window.addEventListener('DOMContentLoaded', () => {
     head.appendChild(style);
     style.appendChild(document.createTextNode(css));
 
-    navigator.mediaDevices.chromiumGetDisplayMedia = navigator.mediaDevices.getDisplayMedia;
+    const button = document.createElement('button')
+    button.id="custom-screenshare"
+    button.innerHTML = 'Screen sharing'
+    button.on('click',e=>{
+        console.log("custom screen sharing dialog")
+        e.preventDefault()
+        e.stopPropagation()
+        desktopCapturer.getSources({ types: ['window', 'screen'] }).then(async sources => {
+            for (const source of sources) {
+                if (source.name === 'Electron') {
+                mainWindow.webContents.send('SET_SOURCE', source.id)
+                return
+                }
+            }
+        })
+    })
+    $('button[aria-controls="popout_32"]').parent().append(button)
+})
 
-    const getAudioDevice = async (nameOfAudioDevice) => {
-        await navigator.mediaDevices.getUserMedia({
-            audio: true
-        });
-        let devices = await navigator.mediaDevices.enumerateDevices();
-        let audioDevice = devices.find(({
-            label
-        }) => label === nameOfAudioDevice);
-        return audioDevice;
-    };
+const getAudioDevice = async (nameOfAudioDevice) => {
+    await navigator.mediaDevices.getUserMedia({
+        audio: true
+    });
+    let devices = await navigator.mediaDevices.enumerateDevices();
+    let audioDevice = devices.find(({
+        label
+    }) => label === nameOfAudioDevice);
+    return audioDevice;
+}
 
-    const getDisplayMedia = async () => {
-        var id;
-        try {
-            let myDiscordAudioSink = await getAudioDevice('virtmic');
-            id = myDiscordAudioSink.deviceId;
-        }
-        catch (error) {
-            id = "default";
-        }
-        let captureSystemAudioStream = await navigator.mediaDevices.getUserMedia({
-            audio: {
+contextBridge.exposeInMainWorld("myCustomGetDisplayMedia", async () => {
+    const sources = await desktopCapturer.getSources({
+      types: ["window", "screen"],
+    })
+    const selectedSource = sources[0]
+    var id;
+    try {
+        let myDiscordAudioSink = await getAudioDevice('virtmic');
+        id = myDiscordAudioSink.deviceId;
+    }
+    catch (error) {
+        id = "default";
+    }
+    let captureSystemAudioStream = await navigator.mediaDevices.getUserMedia({
+        audio: {
             // We add our audio constraints here, to get a list of supported constraints use navigator.mediaDevices.getSupportedConstraints();
             // We must capture a microphone, we use default since its the only deviceId that is the same for every Chromium user
             deviceId: {
@@ -47,15 +76,9 @@ window.addEventListener('DOMContentLoaded', () => {
             //sampleRate: 48000,
             //sampleSize: 16,
             //volume: 1.0
-            }
-        });
-        let [track] = captureSystemAudioStream.getAudioTracks();
-        const gdm = await navigator.mediaDevices.chromiumGetDisplayMedia({
-            video: true,
-            audio: true
-        });
-        gdm.addTrack(track);
-        return gdm;
-    };
-    navigator.mediaDevices.getDisplayMedia = getDisplayMedia;
+        }
+    });
+    let [track] = captureSystemAudioStream.getAudioTracks();
+    selectedSource.addTrack(track);
+    return selectedSource;
 })
